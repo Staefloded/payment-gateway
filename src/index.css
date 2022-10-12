@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+	font-family: 'SF Pro Display';
+	src: url('../public/sf-pro-display-font/SF-Pro-Display-Regular.ttf');
+}
+body {
+	font-family: 'SF Pro Display', 'inter', sans-serif;
+	font-weight: 400;
+}
+.translateCarousel {
+	transform: translate(-50%, -50%);
+	background: linear-gradient(
+		105.59deg,
+		rgba(255, 255, 255, 0.35) 0%,
+		rgba(255, 255, 255, 0.05) 100%
+	);
+	backdrop-filter: blur(25px);
+}
+
+.ant-radio-checked .ant-radio-inner:after {
+	transform: scale(1);
+}
+.ant-radio-inner:after {
+	background: #7655da;
+}
+
+.custome-step
+	.ant-steps-item-finish
+	> .ant-steps-item-container
+	> .ant-steps-item-tail::after {
+	background-color: rgba(255, 255, 255, 0.45);
+	width: 2px;
+}
+
+/* .ant-table {
+	padding: 0 30px;
+} */
+
+.custom_table thead tr th {
+	background: #ffffff;
+}
+
+.custom_table tbody tr {
+	background: #ffffff;
+}
+
+.ant-pagination-item {
+	display: none;
+}
+
+.ant-pagination-jump-next-custom-icon {
+	display: none;
+}
+
+.ant-pagination {
+	position: relative;
+}
+
+.ant-pagination-options {
+	position: absolute;
+	top: 0;
+	left: 110px;
+	right: 0;
+}
+.ant-pagination-options-quick-jumper input {
+	width: 28px;
+	height: 28px;
+	border: 0.5px solid #7655da;
+	border-radius: 4px;
+	background-color: #faf8fe;
+	padding: 0;
+}
+
+.boxShadowOne {
+	box-shadow: inset 4px 0px 0px #f6f7fb;
+}
+
+.branchInput .ant-input {
+	background-color: #f6f7fb;
+}
+
+.ant-modal-content {
+	border-radius: 16px;
+	/* background: red; */
+}
+
+.removepadding .ant-table-content {
+	padding: 0 0px;
+}
+
+.ant-table-content {
+	padding: 0 30px;
+}
+

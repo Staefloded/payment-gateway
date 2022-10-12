@@ -1,0 +1,12 @@
+{
+  "errorEncountered": "Error was encountered",
+  "LangNotFound": "Language selected is not found",
+  "prAuthData": "Please provide username and password.",
+  "isTouchIDFailed": "Unable to validate the use TouchID",
+  "notMatchUserId": "Username do not match device userID stored",
+  "unableToLoadAccounts": "Account details failed to be loaded, please refresh/restart.",
+  "inputError": "Please supply valid input in field(s) with error.",
+  "TouchIDUsableWithID": "Unable to use TouchID without signing with username and password previously",
+  "billPayment": "Bill Payment was successfully made.",
+  "restartApp": "Please close application and restart it due to failure in background processes."
+}
