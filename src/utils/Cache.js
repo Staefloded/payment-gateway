@@ -1,8 +1,9 @@
 /**
  * Created By Kazeem Olanipekun
  */
-import {Encrypt} from './Encrypt';
+import { Encrypt } from "./Encrypt";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   /**
    * Set Data to storage
@@ -15,7 +16,7 @@ export default {
       return;
     }
     try {
-      await localStorage.setItem(key, Encrypt.encrypt(data));
+      localStorage.setItem(key, Encrypt.encrypt(data));
       if (cb) {
         cb();
       }
@@ -33,7 +34,7 @@ export default {
    */
   async get(key: string) {
     try {
-      return Encrypt.decrypt(await localStorage.getItem(key));
+      return Encrypt.decrypt(localStorage.getItem(key));
     } catch (e) {
       return null;
     }
@@ -44,7 +45,7 @@ export default {
    */
   async clear() {
     try {
-      await localStorage.clear();
+      localStorage.clear();
       return true;
     } catch (e) {
       return null;
@@ -57,7 +58,7 @@ export default {
    */
   async remove(key: string) {
     try {
-      await localStorage.removeItem(key);
+      localStorage.removeItem(key);
       return true;
     } catch (e) {
       return null;

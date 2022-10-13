@@ -1,11 +1,13 @@
 import React from "react";
 import ContentWrapper from "./ContentWrapper";
-import Close from "../assets/socialmediaicons/Close button.svg";
+
 import { ReactComponent as Ussd } from "../assets/socialmediaicons/ussd.svg";
 import { ReactComponent as Transfer } from "../assets/socialmediaicons/Transfer.svg";
 import { ReactComponent as Qr } from "../assets/socialmediaicons/Qr.svg";
 import Lock from "../assets/socialmediaicons/Lock.svg";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { formatMoney } from "utils";
 
 function PaymentHeader() {
   const location = useLocation();
@@ -40,18 +42,27 @@ function PaymentHeader() {
     </NavLink>
   );
 
+  const {
+    Auth: { userProfile },
+  } = useSelector((state) => state);
+
+  const amount = localStorage.getItem("amount") || 0;
+
   return (
     <ContentWrapper>
       <div className="w-[594px] h-[790px] rounded-[18px] bg-white px-6 relative flex flex-col justify-between">
         <div>
           <h2 className="text-[#090921] font-semibold text-[24px] mt-[24px]">Payment options</h2>
 
-          <div className="flex justify-between items-center">
-            <div className="flex-1"></div>
-            <div className="flex-1 flex items-center space-x-6">
-              <p className="text-[#6B7B8A] font-normal text-[18px]">clooney@gmail.com</p>
-              <p className="text-[#6B7B8A] font-normal text-[18px]">
-                Pay: <span className="text-[#087F7F] font-semibold"> ₦4,500</span>
+          <div className="flex justify-end items-center">
+            <div className=" inline-flex items-center space-x-6">
+              <p className="text-[#6B7B8A] font-normal text-[16px]">{userProfile?.email}</p>
+              <p className="text-[#6B7B8A] font-normal text-[16px]">
+                Pay:{" "}
+                <span className="text-[#087F7F] font-semibold flex-shrink-0">
+                  {" "}
+                  {formatMoney(amount)}
+                </span>
               </p>
             </div>
           </div>

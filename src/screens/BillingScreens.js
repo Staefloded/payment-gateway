@@ -1,14 +1,18 @@
 import { Divider } from "antd";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ContentWrapper from "../shared/components/ContentWrapper";
 import { useDispatch } from "react-redux";
+import useLocalStorage from "use-local-storage";
 
 function BillingScreens() {
   const navigate = useNavigate();
   const payHandler = () => {
     navigate("/payment");
+    localStorage.setItem("amount", amount);
   };
+
+  const [amount, setAmount] = useState("");
 
   const {
     Wallet: { getVirtualWallets },
@@ -39,7 +43,9 @@ function BillingScreens() {
             name="amount"
             placeholder="Enter an amount"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
             className="w-full h-[40px] border border-solid border-gray-200 rounded-lg text-[14px] px-2 py-3"
           />
           <Divider className="pt-[30px]" />
