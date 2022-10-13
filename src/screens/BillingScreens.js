@@ -1,10 +1,11 @@
 import { Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import ContentWrapper from '../shared/components/ContentWrapper';
 
 function BillingScreens() {
 	const navigate = useNavigate();
+	const [amount, setAmount] = useState();
 	const payHandler = () => {
 		navigate('/payment');
 	};
@@ -25,10 +26,24 @@ function BillingScreens() {
 							Order №070490
 						</p>
 					</div>
-					<p className='text-[#1A1A1A] font-semibold text-[32px]'>₦10.00</p>
+					<p className='text-[#1A1A1A] font-semibold text-[32px]'>
+						₦{amount ? amount : '00'}.00
+					</p>
 
-					<Divider className='mt-[100px]' />
+					<p className='text-[#4D4D4D] font-normal text-[14px] pt-10'>
+						Please enter an Amount for payment
+					</p>
+					<input
+						type='number'
+						name='amount'
+						placeholder='Enter an amount'
+						value={amount}
+						onChange={(e) => setAmount(e.target.value)}
+						className='w-full h-[40px] border border-solid border-gray-200 rounded-lg text-[14px] px-2 py-3'
+					/>
+					<Divider className='pt-[30px]' />
 				</div>
+
 				<div className='pb-[110px]'>
 					<button
 						onClick={payHandler}
