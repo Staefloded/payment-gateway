@@ -37,8 +37,12 @@ function Login() {
     ref.current.focus();
   }, []);
 
-  const onFinish = (values) => {
-    login(values);
+  const onFinish = async (values) => {
+    const res = await login(values);
+
+    if (res.code === 200) {
+      navigate("/");
+    }
   };
 
   return (

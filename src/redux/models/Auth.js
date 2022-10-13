@@ -62,9 +62,9 @@ export const Auth = {
           dispatch.Loader.setState({
             global: false,
           });
-
-          window.location.href = "/";
         }
+
+        return res;
       } catch (err) {
         this.handleError(err);
 

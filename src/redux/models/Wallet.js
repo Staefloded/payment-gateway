@@ -1,6 +1,7 @@
 import moment from "moment";
 import { reducerActions as reducers } from "./reducer";
 import { WalletApi, AccountApi } from "../../services/apis";
+import { ussdBanks } from "constants/ussdBanks";
 
 const IsState = {
   isServerError: false,
@@ -83,6 +84,86 @@ export const Wallet = {
       } catch (e) {
         dispatch.Wallet.setState({ isLoading: false });
         this.handleError(e);
+      }
+    },
+
+    async getVirtualWallets(payload, state) {
+      dispatch.Wallet.setError(false);
+      try {
+        const { userId } = state.Auth;
+
+        const cashoutResponse = await WalletApi.getCashOutWallet(userId);
+        const salesResponse = await WalletApi.getSalesCollectionWallet(userId);
+        const fundWalletResponse = await WalletApi.getFundWallet(userId);
+
+        await dispatch.Wallet.setState({
+          ...state.Wallet,
+          cashoutWallet: cashoutResponse,
+          salesCollectionWallet: salesResponse,
+          fundWallet: fundWalletResponse,
+        });
+
+        return { sales: salesResponse, cashout: cashoutResponse };
+      } catch (error) {
+        dispatch.Wallet.setError(true);
+        this.handleError(error);
+        throw error;
+      }
+    },
+
+    async getCommission(data, state) {
+      dispatch.Wallet.setError(false);
+      try {
+        const response = await WalletApi.getCommission(data);
+        await dispatch.Wallet.setState({
+          commission: response,
+        });
+
+        return response;
+      } catch (error) {
+        dispatch.Wallet.setError(true);
+        this.handleError(error);
+        throw error;
+      }
+    },
+
+    async getBanks() {
+      try {
+        let { data } = await WalletApi.getBanks();
+        if (data) {
+          await dispatch.Wallet.setState({
+            banks: data.banks.sort((a, b) => (a.name > b.name ? 1 : -1)),
+            ussdUsedBanks: ussdBanks,
+            ussdBanks: ussdBanks?.map((item) => ({
+              label: item.name,
+              value: item.ussd,
+            })),
+          });
+        }
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
+
+    async fundWalletUssdInit(payload, state) {
+      dispatch.Wallet.setError(false);
+      const { merchantId } = state.Wallet.walletProfile;
+
+      payload = {
+        transactionType: payload.transactionType,
+        accountNumber: payload.accountNumber,
+        amount: payload.transferAmount || "100",
+        note: "",
+      };
+
+      try {
+        let responseData = await WalletApi.fundUSSDInit(payload, merchantId);
+
+        if (responseData) {
+          return responseData.data;
+        }
+      } catch (error) {
+        this.handleError(error);
       }
     },
 
