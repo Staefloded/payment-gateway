@@ -7,7 +7,7 @@ export * from './FormatMoney';
 export * from './DateUtil';
 export * from './ExportToExcel';
 export * from './DataArray';
-export * from './bytesconverter'
+export * from './bytesconverter';
+export * from './qr';
 
-
-export {DB, Cache};
+export { DB, Cache };

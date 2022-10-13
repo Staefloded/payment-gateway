@@ -3,12 +3,15 @@ import ContentWrapper from '../shared/components/ContentWrapper';
 import Close from '../shared/assets/socialmediaicons/Close button.svg';
 import Lock from '../shared/assets/socialmediaicons/Lock.svg';
 import SuccessImage from '../shared/assets/successsmall.svg';
+import { connect } from 'react-redux';
 
-function Success() {
+function Success({ logout }) {
 	return (
 		<ContentWrapper>
 			<div className='w-[594px] h-[790px] rounded-[18px] bg-white px-6 relative flex flex-col justify-between'>
-				<div className='absolute top-[12px] right-[12px] cursor-pointer'>
+				<div
+					onClick={() => logout()}
+					className='absolute top-[12px] right-[12px] cursor-pointer'>
 					<img src={Close} alt='' />
 				</div>
 				<div className='flex-1 flex flex-col justify-between w-full'>
@@ -37,5 +40,7 @@ function Success() {
 		</ContentWrapper>
 	);
 }
-
-export default Success;
+const mapDispatch = (dispatch) => ({
+	logout: dispatch.Auth.logout,
+});
+export default connect(null, mapDispatch)(Success);
