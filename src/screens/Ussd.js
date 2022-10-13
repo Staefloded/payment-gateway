@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+
 const { Option } = Select;
 
 function Ussd() {
   const transactionType = "SALES_COLLECTION";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [res, setRes] = useState({});
   const [selectedBank, setSelectedBank] = useState("");
@@ -25,6 +26,8 @@ function Ussd() {
     getBanks();
   }, [getBanks]);
 
+  const amount = localStorage.getItem("amount") || 0;
+
   const initiateTransaction = async (bankName) => {
     setLoading(true);
     try {
@@ -32,7 +35,7 @@ function Ussd() {
 
       const data = {
         accountNumber,
-        transferAmount: commission?.surcharge ?? 0 + commission?.amount ?? 0,
+        transferAmount: Number(amount) + commission?.surcharge ?? 0 + commission?.amount ?? 0,
         transactionType,
       };
 
@@ -81,10 +84,6 @@ function Ussd() {
                   <Option key={index} value={item.value}>
                     <div className="flex justify-between items-center">
                       <p className="text-[#6B7B8A] font-normal text-[16px]">{item.label}</p>
-                      {/* <span className="text-[#565C63] font-normal text-[16px] py-2 px-[13px] bg-[#F7F7F7] rounded-[8px]">
-                        {item.value}
-                        {res?.reference}#
-                      </span> */}
                     </div>
                   </Option>
                 );
@@ -108,7 +107,10 @@ function Ussd() {
       </div>
 
       <div className="mb-[107px]">
-        <button onClick={() => navigate('/loading')} className="w-full h-[60px] bg-[#131313] text-white font-semibold text-[16px] text-center rounded-[8px]">
+        <button
+          onClick={() => navigate("/loading")}
+          className="w-full h-[60px] bg-[#131313] text-white font-semibold text-[16px] text-center rounded-[8px]"
+        >
           I have completed the payment
         </button>
       </div>

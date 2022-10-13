@@ -54,6 +54,7 @@ export const Auth = {
         if (res.code === 200) {
           const profile = await this.getUserProfile();
           await dispatch.Wallet.getAccounts(profile.id);
+          await dispatch.Wallet.getVirtualWallets();
 
           dispatch.Loader.setState({
             global: false,
@@ -77,9 +78,6 @@ export const Auth = {
     },
 
     async getUserProfile(_, state) {
-      dispatch.Loader.setState({
-        global: true,
-      });
       dispatch.Auth.setError(false);
       try {
         let res = await AuthApi.getUserProfile();

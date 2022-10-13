@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SignCover from "../shared/components/SignCover";
 import { carouselData } from "../utils/DataArray";
 import ClanePay from "../shared/assets/logo2.svg";
 import { Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 /* eslint-disable no-template-curly-in-string */
 
@@ -33,6 +33,18 @@ function Login() {
     Auth: { login },
   } = useDispatch();
 
+  const {
+    Auth: { access_token },
+  } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (access_token) {
+      navigate("/", {
+        replace: true,
+      });
+    }
+  }, [access_token, navigate]);
+
   useEffect(() => {
     ref.current.focus();
   }, []);
@@ -41,7 +53,7 @@ function Login() {
     const res = await login(values);
 
     if (res.code === 200) {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   };
 

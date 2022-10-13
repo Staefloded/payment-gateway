@@ -90,20 +90,18 @@ export const Wallet = {
     async getVirtualWallets(payload, state) {
       dispatch.Wallet.setError(false);
       try {
-        const { userId } = state.Auth;
+        const userId = await state.Auth.userId;
 
-        const cashoutResponse = await WalletApi.getCashOutWallet(userId);
         const salesResponse = await WalletApi.getSalesCollectionWallet(userId);
         const fundWalletResponse = await WalletApi.getFundWallet(userId);
 
         await dispatch.Wallet.setState({
           ...state.Wallet,
-          cashoutWallet: cashoutResponse,
           salesCollectionWallet: salesResponse,
           fundWallet: fundWalletResponse,
         });
 
-        return { sales: salesResponse, cashout: cashoutResponse };
+        return { sales: salesResponse };
       } catch (error) {
         dispatch.Wallet.setError(true);
         this.handleError(error);
