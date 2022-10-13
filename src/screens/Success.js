@@ -8,7 +8,7 @@ function Success() {
 	return (
 		<ContentWrapper>
 			<div className='w-[594px] h-[790px] rounded-[18px] bg-white px-6 relative flex flex-col justify-between'>
-				<div className='absolute top-[12px] right-[12px]'>
+				<div className='absolute top-[12px] right-[12px] cursor-pointer'>
 					<img src={Close} alt='' />
 				</div>
 				<div className='flex-1 flex flex-col justify-between w-full'>

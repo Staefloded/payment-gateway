@@ -11,7 +11,7 @@ function TransferLoading() {
 					<h2 className='text-[#090921] font-semibold text-[24px] mt-[24px] invisible'>
 						Payment
 					</h2>
-					<div className='absolute top-[12px] right-[12px]'>
+					<div className='absolute top-[12px] right-[12px] cursor-pointer'>
 						<img src={Close} alt='' />
 					</div>
 
