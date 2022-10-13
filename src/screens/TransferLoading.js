@@ -41,12 +41,6 @@ function TransferLoading() {
       <div className="w-[594px] h-[790px] rounded-[18px] bg-white px-6 relative flex flex-col justify-between">
         <div>
           <h2 className="text-[#090921] font-semibold text-[24px] mt-[24px] invisible">Payment</h2>
-          <div
-            onClick={() => navigate(-1)}
-            className="absolute top-[12px] right-[12px] cursor-pointer"
-          >
-            <img src={Close} alt="" />
-          </div>
 
           <div className="flex justify-end items-center">
             <div className=" inline-flex items-center space-x-6">
