@@ -2,10 +2,12 @@ import { Divider, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 function Ussd() {
   const transactionType = "SALES_COLLECTION";
+  const navigate = useNavigate()
 
   const [res, setRes] = useState({});
   const [selectedBank, setSelectedBank] = useState("");
@@ -106,7 +108,7 @@ function Ussd() {
       </div>
 
       <div className="mb-[107px]">
-        <button className="w-full h-[60px] bg-[#131313] text-white font-semibold text-[16px] text-center rounded-[8px]">
+        <button onClick={() => navigate('/loading')} className="w-full h-[60px] bg-[#131313] text-white font-semibold text-[16px] text-center rounded-[8px]">
           I have completed the payment
         </button>
       </div>
